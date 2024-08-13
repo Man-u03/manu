@@ -29,7 +29,33 @@ module.exports = {
     groupLink: process.env.GcLink || "https://chat.whatsapp.com/E490r0wSpSr89XkCWeGtnX",
     warns: Number(process.env.Warn_Limits) || 3,
     cooldown: 5, // default cooldown time per command in seconds
-    mongoUrl: process.env.MongoDB || "YOUR_MONGODB_URL",
+    mongoUrl: process.env.MongoDB || "
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://Manu:<password>@cluster0.5wxhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+",
     sessionId: process.env.SESSION_ID || "R0FJQzFSTFEjVmowNEdSaF8tckZqVFFra1NpU_Queen-Anya_TRJYTVsU_Queen-Anya_kt3M1o3U_Queen-Anya_FowOTJ6MGZiWEgxMA==",
 
     /**
